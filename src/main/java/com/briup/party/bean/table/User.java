@@ -1,5 +1,11 @@
 package com.briup.party.bean.table;
 
+
+/**
+ *这是一个用户类
+ *
+ * 包括四类用户：学校书记，学院书记，老师，同学,分别对应不同权限
+ */
 public class User {
     private Short id;
 
