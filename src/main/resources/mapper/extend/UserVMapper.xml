@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.party.dao.extend.UserVMMapper">
+
+    <resultMap type="com.briup.party.bean.tableVM.Msgmodal" id="UserVMResultMap">
+        <!-- 以column字段(查询数据库返回的数据字段，如上述查询的user表没有维护user_id)的值调用select属性方法映射到成员属性branch当中 -->
+        <association
+                column="dtl_id"
+                property="userdtl"
+                select="com.briup.party.dao.UserdtlMapper.selectByPrimaryKey">
+        </association>
+        <association
+                column="etd_id"
+                property="useretd"
+                select="com.briup.party.dao.UseretdMapper.selectByPrimaryKey">
+        </association>
+    </resultMap>
+
+    <select id="findById" parameterType="java.lang.Short" resultMap="UserVMResultMap">
+        SELECT dtl_id,etd_id
+        FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="getRole" parameterType="java.lang.String" resultType="java.lang.String">
+        SELECT role.name
+        FROM user, ur, role
+        WHERE role.id = ur.role_id AND
+              ur.user_id = user.id AND
+              user.username = #{username}
+    </select>
+    <!--String getRoleByid(Short id);-->
+    <select id="getRoleById" parameterType="java.lang.Short" resultType="java.lang.String">
+        SELECT role.name
+        FROM user, ur, role
+        WHERE role.id = ur.role_id AND
+              ur.user_id = user.id AND
+              user.id = #{id}
+    </select>
+    <!--Branch findBranchById(Short id);-->
+    <select id="findBranchById" parameterType="java.lang.Short" resultType="com.briup.party.bean.table.Branch">
+        SELECT * FROM branch WHERE id = (SELECT branch_id
+                                           FROM user
+                                           WHERE id = #{id})
+    </select>
+</mapper>

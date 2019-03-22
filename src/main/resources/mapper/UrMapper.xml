@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.party.dao.UrMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.party.bean.table.Ur" >
+    <id column="id" property="id" jdbcType="SMALLINT" />
+    <result column="user_id" property="userId" jdbcType="SMALLINT" />
+    <result column="role_id" property="roleId" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, role_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from ur
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from ur
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.briup.party.bean.table.Ur" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ur (user_id, role_id)
+    values (#{userId,jdbcType=SMALLINT}, #{roleId,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.party.bean.table.Ur" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ur
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=SMALLINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.party.bean.table.Ur" >
+    update ur
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=SMALLINT},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.party.bean.table.Ur" >
+    update ur
+    set user_id = #{userId,jdbcType=SMALLINT},
+      role_id = #{roleId,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+
+  <!--  void deleteByUserId(Short id);-->
+  <delete id="deleteByUserId" parameterType="java.lang.Short" >
+    delete from ur
+    where user_id = #{#userId}
+  </delete>
+</mapper>

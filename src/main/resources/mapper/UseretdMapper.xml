@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.party.dao.UseretdMapper">
+  <resultMap id="BaseResultMap" type="com.briup.party.bean.table.Useretd">
+    <id column="id" jdbcType="SMALLINT" property="id" />
+    <result column="nativeplace" jdbcType="VARCHAR" property="nativeplace" />
+    <result column="is_bdmanager" jdbcType="BIT" property="isBdmanager" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="maritalstatue" jdbcType="VARCHAR" property="maritalstatue" />
+    <result column="joinjobdate" jdbcType="CHAR" property="joinjobdate" />
+    <result column="unitname" jdbcType="VARCHAR" property="unitname" />
+    <result column="majorname" jdbcType="VARCHAR" property="majorname" />
+    <result column="frontlinesituation" jdbcType="VARCHAR" property="frontlinesituation" />
+    <result column="newsocialtype" jdbcType="VARCHAR" property="newsocialtype" />
+    <result column="is_migrantworker" jdbcType="BIT" property="isMigrantworker" />
+    <result column="trainingstatue" jdbcType="VARCHAR" property="trainingstatue" />
+    <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, nativeplace, is_bdmanager, age, maritalstatue, joinjobdate, unitname, majorname, 
+    frontlinesituation, newsocialtype, is_migrantworker, trainingstatue, imageurl
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from useretd
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from useretd
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.briup.party.bean.table.Useretd">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into useretd (nativeplace, is_bdmanager, age, 
+      maritalstatue, joinjobdate, unitname, 
+      majorname, frontlinesituation, newsocialtype, 
+      is_migrantworker, trainingstatue, imageurl
+      )
+    values (#{nativeplace,jdbcType=VARCHAR}, #{isBdmanager,jdbcType=BIT}, #{age,jdbcType=TINYINT}, 
+      #{maritalstatue,jdbcType=VARCHAR}, #{joinjobdate,jdbcType=CHAR}, #{unitname,jdbcType=VARCHAR}, 
+      #{majorname,jdbcType=VARCHAR}, #{frontlinesituation,jdbcType=VARCHAR}, #{newsocialtype,jdbcType=VARCHAR}, 
+      #{isMigrantworker,jdbcType=BIT}, #{trainingstatue,jdbcType=VARCHAR}, #{imageurl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.party.bean.table.Useretd">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into useretd
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="nativeplace != null">
+        nativeplace,
+      </if>
+      <if test="isBdmanager != null">
+        is_bdmanager,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="maritalstatue != null">
+        maritalstatue,
+      </if>
+      <if test="joinjobdate != null">
+        joinjobdate,
+      </if>
+      <if test="unitname != null">
+        unitname,
+      </if>
+      <if test="majorname != null">
+        majorname,
+      </if>
+      <if test="frontlinesituation != null">
+        frontlinesituation,
+      </if>
+      <if test="newsocialtype != null">
+        newsocialtype,
+      </if>
+      <if test="isMigrantworker != null">
+        is_migrantworker,
+      </if>
+      <if test="trainingstatue != null">
+        trainingstatue,
+      </if>
+      <if test="imageurl != null">
+        imageurl,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="nativeplace != null">
+        #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="isBdmanager != null">
+        #{isBdmanager,jdbcType=BIT},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="maritalstatue != null">
+        #{maritalstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="joinjobdate != null">
+        #{joinjobdate,jdbcType=CHAR},
+      </if>
+      <if test="unitname != null">
+        #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="majorname != null">
+        #{majorname,jdbcType=VARCHAR},
+      </if>
+      <if test="frontlinesituation != null">
+        #{frontlinesituation,jdbcType=VARCHAR},
+      </if>
+      <if test="newsocialtype != null">
+        #{newsocialtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isMigrantworker != null">
+        #{isMigrantworker,jdbcType=BIT},
+      </if>
+      <if test="trainingstatue != null">
+        #{trainingstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null">
+        #{imageurl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.party.bean.table.Useretd">
+    update useretd
+    <set>
+      <if test="nativeplace != null">
+        nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="isBdmanager != null">
+        is_bdmanager = #{isBdmanager,jdbcType=BIT},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="maritalstatue != null">
+        maritalstatue = #{maritalstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="joinjobdate != null">
+        joinjobdate = #{joinjobdate,jdbcType=CHAR},
+      </if>
+      <if test="unitname != null">
+        unitname = #{unitname,jdbcType=VARCHAR},
+      </if>
+      <if test="majorname != null">
+        majorname = #{majorname,jdbcType=VARCHAR},
+      </if>
+      <if test="frontlinesituation != null">
+        frontlinesituation = #{frontlinesituation,jdbcType=VARCHAR},
+      </if>
+      <if test="newsocialtype != null">
+        newsocialtype = #{newsocialtype,jdbcType=VARCHAR},
+      </if>
+      <if test="isMigrantworker != null">
+        is_migrantworker = #{isMigrantworker,jdbcType=BIT},
+      </if>
+      <if test="trainingstatue != null">
+        trainingstatue = #{trainingstatue,jdbcType=VARCHAR},
+      </if>
+      <if test="imageurl != null">
+        imageurl = #{imageurl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.party.bean.table.Useretd">
+    update useretd
+    set nativeplace = #{nativeplace,jdbcType=VARCHAR},
+      is_bdmanager = #{isBdmanager,jdbcType=BIT},
+      age = #{age,jdbcType=TINYINT},
+      maritalstatue = #{maritalstatue,jdbcType=VARCHAR},
+      joinjobdate = #{joinjobdate,jdbcType=CHAR},
+      unitname = #{unitname,jdbcType=VARCHAR},
+      majorname = #{majorname,jdbcType=VARCHAR},
+      frontlinesituation = #{frontlinesituation,jdbcType=VARCHAR},
+      newsocialtype = #{newsocialtype,jdbcType=VARCHAR},
+      is_migrantworker = #{isMigrantworker,jdbcType=BIT},
+      trainingstatue = #{trainingstatue,jdbcType=VARCHAR},
+      imageurl = #{imageurl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+</mapper>

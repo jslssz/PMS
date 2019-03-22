@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.party.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.briup.party.bean.table.User">
+    <id column="id" jdbcType="SMALLINT" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="CHAR" property="idcard" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="infocompleteness" jdbcType="DOUBLE" property="infocompleteness" />
+    <result column="branch_id" jdbcType="SMALLINT" property="branchId" />
+    <result column="dtl_id" jdbcType="SMALLINT" property="dtlId" />
+    <result column="etd_id" jdbcType="SMALLINT" property="etdId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, name, idcard, gender, nation, age, category, infocompleteness, 
+    branch_id, dtl_id, etd_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from user
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.briup.party.bean.table.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (username, password, name, 
+      idcard, gender, nation, age, 
+      category, infocompleteness, branch_id, 
+      dtl_id, etd_id)
+    values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=CHAR}, #{gender,jdbcType=CHAR}, #{nation,jdbcType=VARCHAR}, #{age,jdbcType=TINYINT}, 
+      #{category,jdbcType=VARCHAR}, #{infocompleteness,jdbcType=DOUBLE}, #{branchId,jdbcType=SMALLINT}, 
+      #{dtlId,jdbcType=SMALLINT}, #{etdId,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.party.bean.table.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="infocompleteness != null">
+        infocompleteness,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="dtlId != null">
+        dtl_id,
+      </if>
+      <if test="etdId != null">
+        etd_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="infocompleteness != null">
+        #{infocompleteness,jdbcType=DOUBLE},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=SMALLINT},
+      </if>
+      <if test="dtlId != null">
+        #{dtlId,jdbcType=SMALLINT},
+      </if>
+      <if test="etdId != null">
+        #{etdId,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.party.bean.table.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="infocompleteness != null">
+        infocompleteness = #{infocompleteness,jdbcType=DOUBLE},
+      </if>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=SMALLINT},
+      </if>
+      <if test="dtlId != null">
+        dtl_id = #{dtlId,jdbcType=SMALLINT},
+      </if>
+      <if test="etdId != null">
+        etd_id = #{etdId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.party.bean.table.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=CHAR},
+      gender = #{gender,jdbcType=CHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      age = #{age,jdbcType=TINYINT},
+      category = #{category,jdbcType=VARCHAR},
+      infocompleteness = #{infocompleteness,jdbcType=DOUBLE},
+      branch_id = #{branchId,jdbcType=SMALLINT},
+      dtl_id = #{dtlId,jdbcType=SMALLINT},
+      etd_id = #{etdId,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+
+  <!--String getPassword(String username);-->
+  <select id="getPassword" parameterType="java.lang.String" resultType="java.lang.String">
+    select password from user
+    where username = #{username}
+  </select>
+  <!--String getName(String username);-->
+  <select id="getName" parameterType="java.lang.String" resultType="java.lang.String">
+    select name from user
+    where username = #{username}
+  </select>
+  <!-- Short findIdByUsername(String username);-->
+  <select id="findIdByUsername" parameterType="java.lang.String" resultType="java.lang.Short">
+    select id from user
+    where username = #{username}
+  </select>
+</mapper>

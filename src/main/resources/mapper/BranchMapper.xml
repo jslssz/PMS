@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.party.dao.BranchMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.party.bean.table.Branch" >
+    <id column="id" property="id" jdbcType="SMALLINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="academy_id" property="academyId" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, academy_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from branch
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from branch
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.briup.party.bean.table.Branch" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into branch (name, academy_id)
+    values (#{name,jdbcType=VARCHAR}, #{academyId,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.party.bean.table.Branch" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into branch
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="academyId != null" >
+        academy_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="academyId != null" >
+        #{academyId,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.party.bean.table.Branch" >
+    update branch
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="academyId != null" >
+        academy_id = #{academyId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.party.bean.table.Branch" >
+    update branch
+    set name = #{name,jdbcType=VARCHAR},
+      academy_id = #{academyId,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <!-- List<User> findUserById(Short id);-->
+  <select id="findUserById" parameterType="java.lang.Short" resultType="com.briup.party.bean.table.User">
+    select * from user
+    where branch_id = #{id}
+  </select>
+  <!--List<User> findUserByIdArray(List<Short> list);-->
+  <select id="findUserByIdArray" parameterType="java.util.List" resultType="com.briup.party.bean.table.User">
+    select * from user  where branch_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </select>
+
+  <select id="getUserCount" resultType="Short" parameterType="Short">
+    SELECT COUNT(*) FROM user
+    where branch_id = #{id}
+  </select>
+  <select id="getprepareNumber" resultType="Short" parameterType="Short">
+    SELECT COUNT(category) FROM user
+    where category = '预备党员' and branch_id = #{id}
+  </select>
+  <select id="getfemaleNumber" resultType="Short" parameterType="Short">
+    SELECT COUNT(gender) FROM user
+    where gender = '女' and branch_id = #{id}
+  </select>
+  <select id="getminorityNumber" resultType="Short" parameterType="Short">
+    SELECT COUNT(nation) FROM user
+    where nation &lt;&gt;'汉族' and branch_id = #{id}
+  </select>
+</mapper>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.party.dao.UserdtlMapper">
+  <resultMap id="BaseResultMap" type="com.briup.party.bean.table.Userdtl">
+    <id column="id" jdbcType="SMALLINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="idcard" jdbcType="CHAR" property="idcard" />
+    <result column="birthdate" jdbcType="CHAR" property="birthdate" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="category" jdbcType="CHAR" property="category" />
+    <result column="branch_id" jdbcType="SMALLINT" property="branchId" />
+    <result column="joindate" jdbcType="CHAR" property="joindate" />
+    <result column="conversiondate" jdbcType="CHAR" property="conversiondate" />
+    <result column="work" jdbcType="VARCHAR" property="work" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="telearea" jdbcType="VARCHAR" property="telearea" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="partystate" jdbcType="VARCHAR" property="partystate" />
+    <result column="is_lost" jdbcType="BIT" property="isLost" />
+    <result column="lostdate" jdbcType="CHAR" property="lostdate" />
+    <result column="is_flow" jdbcType="BIT" property="isFlow" />
+    <result column="flowwhere" jdbcType="VARCHAR" property="flowwhere" />
+    <result column="schoolyear" jdbcType="VARCHAR" property="schoolyear" />
+    <result column="educationsystme" jdbcType="VARCHAR" property="educationsystme" />
+    <result column="clazz" jdbcType="VARCHAR" property="clazz" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, name, gender, nation, idcard, birthdate, education, category, branch_id, joindate, 
+    conversiondate, work, phone, telearea, telephone, address, partystate, is_lost, lostdate, 
+    is_flow, flowwhere, schoolyear, educationsystme, clazz
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Short" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userdtl
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short">
+    delete from userdtl
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.briup.party.bean.table.Userdtl">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into userdtl (name, gender, nation, 
+      idcard, birthdate, education, 
+      category, branch_id, joindate, 
+      conversiondate, work, phone, 
+      telearea, telephone, address, 
+      partystate, is_lost, lostdate, 
+      is_flow, flowwhere, schoolyear, 
+      educationsystme, clazz)
+    values (#{name,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{nation,jdbcType=VARCHAR}, 
+      #{idcard,jdbcType=CHAR}, #{birthdate,jdbcType=CHAR}, #{education,jdbcType=VARCHAR}, 
+      #{category,jdbcType=CHAR}, #{branchId,jdbcType=SMALLINT}, #{joindate,jdbcType=CHAR}, 
+      #{conversiondate,jdbcType=CHAR}, #{work,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
+      #{telearea,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{partystate,jdbcType=VARCHAR}, #{isLost,jdbcType=BIT}, #{lostdate,jdbcType=CHAR}, 
+      #{isFlow,jdbcType=BIT}, #{flowwhere,jdbcType=VARCHAR}, #{schoolyear,jdbcType=VARCHAR}, 
+      #{educationsystme,jdbcType=VARCHAR}, #{clazz,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.party.bean.table.Userdtl">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Short">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into userdtl
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="nation != null">
+        nation,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="birthdate != null">
+        birthdate,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="branchId != null">
+        branch_id,
+      </if>
+      <if test="joindate != null">
+        joindate,
+      </if>
+      <if test="conversiondate != null">
+        conversiondate,
+      </if>
+      <if test="work != null">
+        work,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="telearea != null">
+        telearea,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="partystate != null">
+        partystate,
+      </if>
+      <if test="isLost != null">
+        is_lost,
+      </if>
+      <if test="lostdate != null">
+        lostdate,
+      </if>
+      <if test="isFlow != null">
+        is_flow,
+      </if>
+      <if test="flowwhere != null">
+        flowwhere,
+      </if>
+      <if test="schoolyear != null">
+        schoolyear,
+      </if>
+      <if test="educationsystme != null">
+        educationsystme,
+      </if>
+      <if test="clazz != null">
+        clazz,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="nation != null">
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="birthdate != null">
+        #{birthdate,jdbcType=CHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=CHAR},
+      </if>
+      <if test="branchId != null">
+        #{branchId,jdbcType=SMALLINT},
+      </if>
+      <if test="joindate != null">
+        #{joindate,jdbcType=CHAR},
+      </if>
+      <if test="conversiondate != null">
+        #{conversiondate,jdbcType=CHAR},
+      </if>
+      <if test="work != null">
+        #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="telearea != null">
+        #{telearea,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="partystate != null">
+        #{partystate,jdbcType=VARCHAR},
+      </if>
+      <if test="isLost != null">
+        #{isLost,jdbcType=BIT},
+      </if>
+      <if test="lostdate != null">
+        #{lostdate,jdbcType=CHAR},
+      </if>
+      <if test="isFlow != null">
+        #{isFlow,jdbcType=BIT},
+      </if>
+      <if test="flowwhere != null">
+        #{flowwhere,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolyear != null">
+        #{schoolyear,jdbcType=VARCHAR},
+      </if>
+      <if test="educationsystme != null">
+        #{educationsystme,jdbcType=VARCHAR},
+      </if>
+      <if test="clazz != null">
+        #{clazz,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.party.bean.table.Userdtl">
+    update userdtl
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="nation != null">
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="birthdate != null">
+        birthdate = #{birthdate,jdbcType=CHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=CHAR},
+      </if>
+      <if test="branchId != null">
+        branch_id = #{branchId,jdbcType=SMALLINT},
+      </if>
+      <if test="joindate != null">
+        joindate = #{joindate,jdbcType=CHAR},
+      </if>
+      <if test="conversiondate != null">
+        conversiondate = #{conversiondate,jdbcType=CHAR},
+      </if>
+      <if test="work != null">
+        work = #{work,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="telearea != null">
+        telearea = #{telearea,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="partystate != null">
+        partystate = #{partystate,jdbcType=VARCHAR},
+      </if>
+      <if test="isLost != null">
+        is_lost = #{isLost,jdbcType=BIT},
+      </if>
+      <if test="lostdate != null">
+        lostdate = #{lostdate,jdbcType=CHAR},
+      </if>
+      <if test="isFlow != null">
+        is_flow = #{isFlow,jdbcType=BIT},
+      </if>
+      <if test="flowwhere != null">
+        flowwhere = #{flowwhere,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolyear != null">
+        schoolyear = #{schoolyear,jdbcType=VARCHAR},
+      </if>
+      <if test="educationsystme != null">
+        educationsystme = #{educationsystme,jdbcType=VARCHAR},
+      </if>
+      <if test="clazz != null">
+        clazz = #{clazz,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.party.bean.table.Userdtl">
+    update userdtl
+    set name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=CHAR},
+      birthdate = #{birthdate,jdbcType=CHAR},
+      education = #{education,jdbcType=VARCHAR},
+      category = #{category,jdbcType=CHAR},
+      branch_id = #{branchId,jdbcType=SMALLINT},
+      joindate = #{joindate,jdbcType=CHAR},
+      conversiondate = #{conversiondate,jdbcType=CHAR},
+      work = #{work,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=CHAR},
+      telearea = #{telearea,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      partystate = #{partystate,jdbcType=VARCHAR},
+      is_lost = #{isLost,jdbcType=BIT},
+      lostdate = #{lostdate,jdbcType=CHAR},
+      is_flow = #{isFlow,jdbcType=BIT},
+      flowwhere = #{flowwhere,jdbcType=VARCHAR},
+      schoolyear = #{schoolyear,jdbcType=VARCHAR},
+      educationsystme = #{educationsystme,jdbcType=VARCHAR},
+      clazz = #{clazz,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+</mapper>

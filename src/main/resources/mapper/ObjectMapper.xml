@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.party.dao.ObjectMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.party.bean.table.Object" >
+    <id column="id" property="id" jdbcType="SMALLINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="CHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="teacher" property="teacher" jdbcType="VARCHAR" />
+    <result column="host" property="host" jdbcType="VARCHAR" />
+    <result column="recoder" property="recoder" jdbcType="VARCHAR" />
+    <result column="due" property="due" jdbcType="SMALLINT" />
+    <result column="attendence" property="attendence" jdbcType="SMALLINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="url_note" property="urlNote" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, time, address, teacher, host, recoder, due, attendence, content, url_note, 
+    user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from object
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from object
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.briup.party.bean.table.Object" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into object (name, time, address, 
+      teacher, host, recoder, 
+      due, attendence, content, 
+      url_note, user_id)
+    values (#{name,jdbcType=VARCHAR}, #{time,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, 
+      #{teacher,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{recoder,jdbcType=VARCHAR}, 
+      #{due,jdbcType=SMALLINT}, #{attendence,jdbcType=SMALLINT}, #{content,jdbcType=VARCHAR}, 
+      #{urlNote,jdbcType=VARCHAR}, #{userId,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.party.bean.table.Object" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into object
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="teacher != null" >
+        teacher,
+      </if>
+      <if test="host != null" >
+        host,
+      </if>
+      <if test="recoder != null" >
+        recoder,
+      </if>
+      <if test="due != null" >
+        due,
+      </if>
+      <if test="attendence != null" >
+        attendence,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="urlNote != null" >
+        url_note,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null" >
+        #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="recoder != null" >
+        #{recoder,jdbcType=VARCHAR},
+      </if>
+      <if test="due != null" >
+        #{due,jdbcType=SMALLINT},
+      </if>
+      <if test="attendence != null" >
+        #{attendence,jdbcType=SMALLINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="urlNote != null" >
+        #{urlNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.party.bean.table.Object" >
+    update object
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null" >
+        teacher = #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="recoder != null" >
+        recoder = #{recoder,jdbcType=VARCHAR},
+      </if>
+      <if test="due != null" >
+        due = #{due,jdbcType=SMALLINT},
+      </if>
+      <if test="attendence != null" >
+        attendence = #{attendence,jdbcType=SMALLINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="urlNote != null" >
+        url_note = #{urlNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.party.bean.table.Object" >
+    update object
+    set name = #{name,jdbcType=VARCHAR},
+      time = #{time,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR},
+      teacher = #{teacher,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      recoder = #{recoder,jdbcType=VARCHAR},
+      due = #{due,jdbcType=SMALLINT},
+      attendence = #{attendence,jdbcType=SMALLINT},
+      content = #{content,jdbcType=VARCHAR},
+      url_note = #{urlNote,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+
+  <select id="findByUserId" parameterType="java.lang.Short" resultType="com.briup.party.bean.table.Object">
+    select * from object
+    where user_id = #{userId}
+  </select>
+  <select id="findByUserIdArray" parameterType="java.util.List" resultType="com.briup.party.bean.table.Object">
+    select * from object where user_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </select>
+</mapper>

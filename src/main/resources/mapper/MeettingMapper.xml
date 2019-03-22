@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.party.dao.MeettingMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.party.bean.table.Meetting" >
+    <id column="id" property="id" jdbcType="SMALLINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="CHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="host" property="host" jdbcType="VARCHAR" />
+    <result column="recoder" property="recoder" jdbcType="VARCHAR" />
+    <result column="present" property="present" jdbcType="VARCHAR" />
+    <result column="absent" property="absent" jdbcType="VARCHAR" />
+    <result column="attend" property="attend" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="url_note" property="urlNote" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="SMALLINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, category, time, address, host, recoder, present, absent, attend, title, 
+    content, url_note, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Short" >
+    select 
+    <include refid="Base_Column_List" />
+    from meetting
+    where id = #{id,jdbcType=SMALLINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Short" >
+    delete from meetting
+    where id = #{id,jdbcType=SMALLINT}
+  </delete>
+  <insert id="insert" parameterType="com.briup.party.bean.table.Meetting" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into meetting (name, category, time, 
+      address, host, recoder, 
+      present, absent, attend, 
+      title, content, url_note, 
+      user_id)
+    values (#{name,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR}, #{time,jdbcType=CHAR}, 
+      #{address,jdbcType=VARCHAR}, #{host,jdbcType=VARCHAR}, #{recoder,jdbcType=VARCHAR}, 
+      #{present,jdbcType=VARCHAR}, #{absent,jdbcType=VARCHAR}, #{attend,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{urlNote,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=SMALLINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.party.bean.table.Meetting" >
+    <selectKey resultType="java.lang.Short" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into meetting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="category != null" >
+        category,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="host != null" >
+        host,
+      </if>
+      <if test="recoder != null" >
+        recoder,
+      </if>
+      <if test="present != null" >
+        present,
+      </if>
+      <if test="absent != null" >
+        absent,
+      </if>
+      <if test="attend != null" >
+        attend,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="urlNote != null" >
+        url_note,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="recoder != null" >
+        #{recoder,jdbcType=VARCHAR},
+      </if>
+      <if test="present != null" >
+        #{present,jdbcType=VARCHAR},
+      </if>
+      <if test="absent != null" >
+        #{absent,jdbcType=VARCHAR},
+      </if>
+      <if test="attend != null" >
+        #{attend,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="urlNote != null" >
+        #{urlNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=SMALLINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.party.bean.table.Meetting" >
+    update meetting
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null" >
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=CHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null" >
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="recoder != null" >
+        recoder = #{recoder,jdbcType=VARCHAR},
+      </if>
+      <if test="present != null" >
+        present = #{present,jdbcType=VARCHAR},
+      </if>
+      <if test="absent != null" >
+        absent = #{absent,jdbcType=VARCHAR},
+      </if>
+      <if test="attend != null" >
+        attend = #{attend,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="urlNote != null" >
+        url_note = #{urlNote,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=SMALLINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.party.bean.table.Meetting" >
+    update meetting
+    set name = #{name,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      time = #{time,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      recoder = #{recoder,jdbcType=VARCHAR},
+      present = #{present,jdbcType=VARCHAR},
+      absent = #{absent,jdbcType=VARCHAR},
+      attend = #{attend,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      url_note = #{urlNote,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=SMALLINT}
+    where id = #{id,jdbcType=SMALLINT}
+  </update>
+
+  <select id="findByUserId" parameterType="java.lang.Short" resultType="com.briup.party.bean.table.Meetting">
+    select * from meetting
+    where user_id = #{userId}
+  </select>
+  <select id="findByUserIdArray" parameterType="java.util.List" resultType="com.briup.party.bean.table.Meetting">
+    select * from meetting where user_id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </select>
+</mapper>

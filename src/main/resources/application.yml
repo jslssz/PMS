@@ -1,0 +1,24 @@
+#   上线环境
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/party
+    username: root
+    password: 8899
+server:
+  port: 8088
+
+---
+# 开发环境
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/party
+    username: root
+    password: 8899
+server:
+  port: 8080
+  servlet:
+    context-path: /party
+
